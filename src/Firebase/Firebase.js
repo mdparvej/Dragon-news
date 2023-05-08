@@ -5,13 +5,23 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDSPzbM5N2J-9aGQ7c9ZquC-97w3JN58yQ",
-  authDomain: "starlit-primacy-373504.firebaseapp.com",
-  projectId: "starlit-primacy-373504",
-  storageBucket: "starlit-primacy-373504.appspot.com", 
-  messagingSenderId: "143193375985",
-  appId: "1:143193375985:web:309347127c52df57359550"
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket, 
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId
 };
+
+
+
+
+// apiKey: "AIzaSyDSPzbM5N2J-9aGQ7c9ZquC-97w3JN58yQ",
+//   authDomain: "starlit-primacy-373504.firebaseapp.com",
+//   projectId: "starlit-primacy-373504",
+//   storageBucket: "starlit-primacy-373504.appspot.com",
+//   messagingSenderId: "143193375985",
+//   appId: "1:143193375985:web:309347127c52df57359550"
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

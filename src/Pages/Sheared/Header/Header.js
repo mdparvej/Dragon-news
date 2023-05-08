@@ -5,9 +5,22 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import LeftSideNav from "../LeftSideNav/LeftSideNav";
 import { myContex } from "../../AuthContex/AuthContex";
+import { Link } from "react-router-dom";
+import { AuthContex } from "../../../Contexts/AuthProvider/AuthProvider";
+import { FaUser } from "react-icons/fa";
+import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
 
 const Header = () => {
-  const {currentUser} = useContext(myContex);
+  const {currentUser,logOut} = useContext(myContex);
+  const {user} = useContext(AuthContex);
+  const handleLogOut = () => {
+    logOut()
+    .then(() => {
+
+    })
+    .catch(error => console.error(error))
+  }
   return (
     <Navbar
       collapseOnSelect
@@ -17,7 +30,7 @@ const Header = () => {
       variant="light"
     >
       <Container>
-        <Navbar.Brand href="#home">Dragon News</Navbar.Brand>
+        <Navbar.Brand><Link to="/">Dragon News</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -36,10 +49,20 @@ const Header = () => {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              {currentUser.displayName}
-            </Nav.Link>
+            <Nav.Link>More deets {user?.displayName}</Nav.Link>
+            <Nav.Link><Link to="/profile">Profile</Link></Nav.Link>
+            
+            < >
+              {currentUser?.displayName ? 
+              <><Button variant="light" onClick={handleLogOut}>Log Out</Button></> 
+              : <> 
+                <Button variant="light"><Link  to='/login'>Login</Link></Button> 
+                <Button variant="light"><Link  to='/resister'>Resister</Link></Button> 
+              </>
+              }
+
+              {currentUser?.photoURL ? <Image src={currentUser.photoURL} style={{height: '40px'}} roundedCircle></Image> : <FaUser></FaUser>}
+            </>
             <div className="d-lg-none">
               <LeftSideNav></LeftSideNav>
             </div>
